@@ -174,6 +174,15 @@ export function searchCities(
 }
 
 /**
+ * Get cities by name (alias for searchCities for backward compatibility)
+ * @param name - City name (Arabic or English)
+ * @returns Array of matching cities
+ */
+export function getCitiesByName(name: string): CityLite[] {
+  return searchCities(name);
+}
+
+/**
  * Search districts by name (Arabic or English)
  * @param query - Search query
  * @param options - Search options

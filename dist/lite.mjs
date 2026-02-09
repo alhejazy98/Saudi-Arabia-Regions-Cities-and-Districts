@@ -54045,6 +54045,14 @@ function searchCities(query, options = {}) {
     });
 }
 /**
+ * Get cities by name (alias for searchCities for backward compatibility)
+ * @param name - City name (Arabic or English)
+ * @returns Array of matching cities
+ */
+function getCitiesByName(name) {
+    return searchCities(name);
+}
+/**
  * Search districts by name (Arabic or English)
  * @param query - Search query
  * @param options - Search options
@@ -54125,5 +54133,5 @@ function getRegionsByPopulation(ascending = false) {
     return ascending ? sorted.reverse() : sorted;
 }
 
-export { calculateDistance, findCitiesInRadius, findNearestCity, getAllCities, getAllDistricts, getAllRegions, getCapitalCity, getCitiesByRegion, getCityById, getCityOfDistrict, getDistrictById, getDistrictsByCity, getDistrictsByRegion, getItemsWithinRadius, getRegionByCode, getRegionById, getRegionOfCity, getRegionOfDistrict, getRegionsByPopulation, getTotalPopulation, isWithinSaudiArabia, resetSpatialCache, searchCities, searchDistricts, searchRegions };
+export { calculateDistance, findCitiesInRadius, findNearestCity, getAllCities, getAllDistricts, getAllRegions, getCapitalCity, getCitiesByName, getCitiesByRegion, getCityById, getCityOfDistrict, getDistrictById, getDistrictsByCity, getDistrictsByRegion, getItemsWithinRadius, getRegionByCode, getRegionById, getRegionOfCity, getRegionOfDistrict, getRegionsByPopulation, getTotalPopulation, isWithinSaudiArabia, resetSpatialCache, searchCities, searchDistricts, searchRegions };
 //# sourceMappingURL=lite.mjs.map

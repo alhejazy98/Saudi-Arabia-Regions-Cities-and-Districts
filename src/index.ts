@@ -1,8 +1,10 @@
 import regionsData from '../json/regions.json';
 import citiesData from '../json/cities.json';
+import districtsData from '../json/districts.json';
 import type {
   Region,
   City,
+  District,
   SearchOptions,
   GeoJSONFeatureCollection,
 } from './types';
@@ -23,6 +25,7 @@ try {
 
 const regions = regionsData as Region[];
 const cities = citiesData as City[];
+const districts = districtsData as District[];
 
 /**
  * Get all regions
@@ -38,6 +41,14 @@ export function getAllRegions(): Region[] {
  */
 export function getAllCities(): City[] {
   return cities;
+}
+
+/**
+ * Get all districts
+ * @returns Array of all districts
+ */
+export function getAllDistricts(): District[] {
+  return districts;
 }
 
 /**
@@ -59,6 +70,15 @@ export function getCityById(id: number): City | undefined {
 }
 
 /**
+ * Get district by ID
+ * @param id - District ID
+ * @returns District object or undefined
+ */
+export function getDistrictById(id: number): District | undefined {
+  return districts.find((district) => district.district_id === id);
+}
+
+/**
  * Get region by code
  * @param code - Region code (e.g., 'RD', 'MQ')
  * @returns Region object or undefined
@@ -74,6 +94,24 @@ export function getRegionByCode(code: string): Region | undefined {
  */
 export function getCitiesByRegion(regionId: number): City[] {
   return cities.filter((city) => city.region_id === regionId);
+}
+
+/**
+ * Get districts by city ID
+ * @param cityId - City ID
+ * @returns Array of districts in the city
+ */
+export function getDistrictsByCity(cityId: number): District[] {
+  return districts.filter((district) => district.city_id === cityId);
+}
+
+/**
+ * Get districts by region ID
+ * @param regionId - Region ID
+ * @returns Array of districts in the region
+ */
+export function getDistrictsByRegion(regionId: number): District[] {
+  return districts.filter((district) => district.region_id === regionId);
 }
 
 /**
@@ -151,6 +189,15 @@ export function searchCities(
 }
 
 /**
+ * Get cities by name (alias for searchCities for backward compatibility)
+ * @param name - City name (Arabic or English)
+ * @returns Array of matching cities
+ */
+export function getCitiesByName(name: string): City[] {
+  return searchCities(name);
+}
+
+/**
  * Get capital city of a region
  * @param regionId - Region ID
  * @returns Capital city object or undefined
@@ -214,16 +261,110 @@ export function getRegionsByPopulation(ascending: boolean = false): Region[] {
   return ascending ? sorted.reverse() : sorted;
 }
 
-// Export reverse geocoding functions
-export {
-  findRegionByCoordinates,
-  findNearestCity,
-  findCitiesInRadius,
-  reverseGeocode,
-  isWithinSaudiArabia,
-  findClosestRegion,
+// Import reverse geocoding functions for wrapping
+import {
+  findRegionByCoordinates as _findRegionByCoordinates,
+  findNearestCity as _findNearestCity,
+  findCitiesInRadius as _findCitiesInRadius,
+  reverseGeocode as _reverseGeocode,
+  isWithinSaudiArabia as _isWithinSaudiArabia,
+  findClosestRegion as _findClosestRegion,
   resetSpatialCache,
 } from './reverse-geocoding';
+
+/**
+ * Find region by coordinates
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @returns Region or undefined
+ */
+export function findRegionByCoordinates(lon: number, lat: number): Region | undefined {
+  return _findRegionByCoordinates(lat, lon, regions);
+}
+
+/**
+ * Find nearest city to coordinates
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @param maxRadiusKm - Optional maximum search radius in kilometers
+ * @returns Nearest city or undefined
+ */
+export function findNearestCity(lon: number, lat: number, maxRadiusKm?: number): City | undefined {
+  return _findNearestCity(lat, lon, cities, maxRadiusKm);
+}
+
+/**
+ * Find cities within radius
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @param radiusKm - Radius in kilometers
+ * @returns Array of cities with distances
+ */
+export function findCitiesInRadius(
+  lon: number,
+  lat: number,
+  radiusKm: number
+): Array<{ city: City; distance: number }> {
+  return _findCitiesInRadius(lat, lon, cities, radiusKm);
+}
+
+/**
+ * Find nearest cities to coordinates
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @param count - Number of cities to return (default: 5)
+ * @returns Array of nearest cities with distances
+ */
+export function findNearestCities(
+  lon: number,
+  lat: number,
+  count: number = 5
+): Array<{ city: City; distance: number }> {
+  const allCities = _findCitiesInRadius(lat, lon, cities, 10000);
+  return allCities.slice(0, count);
+}
+
+/**
+ * Reverse geocode coordinates to location details
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @returns Location details including region, nearest city, and distance
+ */
+export function reverseGeocode(lon: number, lat: number): {
+  region: Region | undefined;
+  nearestCity: City | undefined;
+  distance: number | undefined;
+  coordinates: [number, number];
+} | null {
+  const result = _reverseGeocode(lat, lon, regions, cities);
+  if (!result.region && !result.nearestCity) {
+    return null;
+  }
+  return result;
+}
+
+/**
+ * Check if coordinates are within Saudi Arabia
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @returns True if within Saudi Arabia bounds
+ */
+export function isWithinSaudiArabia(lon: number, lat: number): boolean {
+  return _isWithinSaudiArabia(lat, lon);
+}
+
+/**
+ * Find closest region to coordinates (even if outside boundaries)
+ * @param lon - Longitude
+ * @param lat - Latitude
+ * @returns Closest region or undefined
+ */
+export function findClosestRegion(lon: number, lat: number): Region | undefined {
+  return _findClosestRegion(lat, lon, regions);
+}
+
+// Export spatial cache reset
+export { resetSpatialCache };
 
 // Export geometry utilities
 export {

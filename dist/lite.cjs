@@ -54047,6 +54047,14 @@ function searchCities(query, options = {}) {
     });
 }
 /**
+ * Get cities by name (alias for searchCities for backward compatibility)
+ * @param name - City name (Arabic or English)
+ * @returns Array of matching cities
+ */
+function getCitiesByName(name) {
+    return searchCities(name);
+}
+/**
  * Search districts by name (Arabic or English)
  * @param query - Search query
  * @param options - Search options
@@ -54134,6 +54142,7 @@ exports.getAllCities = getAllCities;
 exports.getAllDistricts = getAllDistricts;
 exports.getAllRegions = getAllRegions;
 exports.getCapitalCity = getCapitalCity;
+exports.getCitiesByName = getCitiesByName;
 exports.getCitiesByRegion = getCitiesByRegion;
 exports.getCityById = getCityById;
 exports.getCityOfDistrict = getCityOfDistrict;

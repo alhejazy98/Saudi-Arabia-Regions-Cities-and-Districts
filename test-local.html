@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار المكتبة - محلي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .result {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+            background: #ffe6e6;
+        }
+        .success {
+            color: green;
+            background: #e6ffe6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🇸🇦 اختبار مكتبة البيانات الجغرافية - محلي</h1>
+    <div id="output"></div>
+
+    <!-- تحميل المكتبة من الملف المحلي -->
+    <script src="dist/lite.js"></script>
+    
+    <script>
+        const output = document.getElementById('output');
+        
+        function addResult(title, content, isError = false) {
+            const div = document.createElement('div');
+            div.className = 'result ' + (isError ? 'error' : 'success');
+            div.innerHTML = `<h3>${title}</h3><pre>${content}</pre>`;
+            output.appendChild(div);
+        }
+
+        try {
+            // التحقق من تحميل المكتبة
+            if (!window.SaudiGeodataLite) {
+                throw new Error('المكتبة غير محملة - window.SaudiGeodataLite غير موجود');
+            }
+
+            const saudiGeo = window.SaudiGeodataLite;
+            addResult('✅ تحميل المكتبة', 'تم تحميل النسخة الخفيفة بنجاح!');
+
+            // اختبار getAllRegions
+            const regions = saudiGeo.getAllRegions();
+            addResult('✅ getAllRegions()', `عدد المناطق: ${regions.length}\nأول منطقة: ${JSON.stringify(regions[0], null, 2)}`);
+
+            // اختبار getAllCities
+            const cities = saudiGeo.getAllCities();
+            addResult('✅ getAllCities()', `عدد المدن: ${cities.length}\nأول مدينة: ${JSON.stringify(cities[0], null, 2)}`);
+
+            // اختبار getAllDistricts
+            const districts = saudiGeo.getAllDistricts();
+            addResult('✅ getAllDistricts()', `عدد الأحياء: ${districts.length}\nأول حي: ${JSON.stringify(districts[0], null, 2)}`);
+
+            // اختبار getCitiesByName
+            const riyadhCities = saudiGeo.getCitiesByName('الرياض');
+            addResult('✅ getCitiesByName("الرياض")', `النتائج: ${riyadhCities.length}\n${JSON.stringify(riyadhCities[0], null, 2)}`);
+
+            // النسخة الخفيفة لا تحتوي على reverseGeocode (تحتاج GeoJSON)
+            addResult('ℹ️ reverseGeocode', 'غير متاح في النسخة الخفيفة (يتطلب بيانات GeoJSON)');
+
+            // النسخة الخفيفة لا تحتوي على calculateDistance (لا توجد إحداثيات center)
+            addResult('ℹ️ calculateDistance', 'غير متاح في النسخة الخفيفة (لا توجد بيانات center)');
+
+            // النسخة الخفيفة لا تحتوي على findNearestCities (لا توجد إحداثيات)
+            addResult('ℹ️ findNearestCities', 'غير متاح في النسخة الخفيفة (لا توجد بيانات center)');
+
+            addResult('🎉 الاختبار النهائي', 'جميع الاختبارات المتاحة نجحت! النسخة الخفيفة للبيانات الأساسية فقط.');
+
+        } catch (error) {
+            addResult('❌ خطأ', error.message + '\n' + error.stack, true);
+        }
+    </script>
+</body>
+</html>
