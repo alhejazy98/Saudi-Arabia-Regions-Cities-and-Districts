@@ -1,19 +1,21 @@
-import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 const external = [];
 
 const plugins = [
-  json(),
-  typescript({
-    tsconfig: './tsconfig.json',
+  resolve({
+    extensions: ['.js', '.ts'],
   }),
+  commonjs(),
+  json(),
 ];
 
 export default [
   // Full version with all data
   {
-    input: 'src/index.ts',
+    input: 'dist-temp/src/index.js',
     output: [
       {
         file: 'dist/index.js',
@@ -31,7 +33,7 @@ export default [
   },
   // Lite version (without boundaries/center data)
   {
-    input: 'src/lite.ts',
+    input: 'dist-temp/src/lite.js',
     output: [
       {
         file: 'dist/lite.js',
