@@ -19,6 +19,12 @@ export default [
     output: [
       {
         file: 'dist/index.js',
+        format: 'umd',
+        name: 'SaudiGeodata',
+        sourcemap: true,
+      },
+      {
+        file: 'dist/index.cjs',
         format: 'cjs',
         sourcemap: true,
       },
@@ -37,6 +43,12 @@ export default [
     output: [
       {
         file: 'dist/lite.js',
+        format: 'umd',
+        name: 'SaudiGeodataLite',
+        sourcemap: true,
+      },
+      {
+        file: 'dist/lite.cjs',
         format: 'cjs',
         sourcemap: true,
       },
