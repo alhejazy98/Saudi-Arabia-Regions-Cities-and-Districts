@@ -46,15 +46,19 @@ Use directly in browser without installation:
 <script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/index.js"></script>
 <script>
   const geo = window.SaudiGeodata;
-  const location = geo.reverseGeocode(46.6753, 24.7136);
-  console.log(location.region.name_ar); // "منطقة الرياض"
+  // استخدم اسم متغير غير 'location' (محجوز في المتصفح)
+  const result = geo.reverseGeocode(46.6753, 24.7136);
+  if (result) {
+    console.log(result.region.name_ar); // "منطقة الرياض"
+  }
 </script>
 
 <!-- Lite Version (~900KB) for basic data only -->
 <script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.js"></script>
 <script>
-  const geo = window.SaudiGeodataLite;
-  const cities = geo.getCitiesByName('جدة');
+  const geoLite = window.SaudiGeodataLite;
+  const cities = geoLite.getCitiesByName('جدة');
+  console.log(cities[0].name_en); // "Jeddah"
 </script>
 ```
 
