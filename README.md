@@ -42,8 +42,8 @@ npm run build
 Use directly in browser without installation:
 
 ```html
-<!-- Full Version (~13MB) with all geographic features -->
-<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/index.js"></script>
+<!-- Full Version (~17MB) - Regions & Cities with GeoJSON -->
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/index.js"></script>
 <script>
   const geo = window.SaudiGeodata;
   // استخدم اسم متغير غير 'location' (محجوز في المتصفح)
@@ -53,8 +53,8 @@ Use directly in browser without installation:
   }
 </script>
 
-<!-- Lite Version (~900KB) for basic data only -->
-<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.js"></script>
+<!-- Lite Version (~1MB) - Basic data with districts ⭐ Recommended -->
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/lite.js"></script>
 <script>
   const geoLite = window.SaudiGeodataLite;
   const cities = geoLite.getCitiesByName('جدة');
@@ -64,9 +64,16 @@ Use directly in browser without installation:
 
 **📖 [Complete CDN Documentation →](./CDN_USAGE.md)**
 
-Version comparison:
-- **Full** (~13MB): All features including reverse geocoding, distance calculation
-- **Lite** (~900KB): Basic data only (names, IDs) - 15x faster load
+**Version comparison:**
+| Feature | Full (~17MB) | Lite (~1MB) ⭐ |
+|---------|-------------|--------------|
+| Regions & Cities | ✅ | ✅ |
+| Districts | ❌* | ✅ Basic info |
+| GeoJSON Boundaries | ✅ | ❌ |
+| Reverse Geocoding | ✅ | ❌ |
+| Distance Calculation | ✅ | ✅ |
+
+*Districts excluded from CDN Full version due to size. Use npm package for complete data.
 
 ## 🚀 Quick Start / البداية السريعة
 

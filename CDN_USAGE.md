@@ -3,31 +3,29 @@
 
 ## 📦 نسختان متاحتان / Two Versions Available
 
-### النسخة الكاملة / Full Version (~13MB)
-تحتوي على جميع البيانات بما في ذلك الإحداثيات الجغرافية والحدود (GeoJSON)
+### النسخة الكاملة / Full Version (~17MB)
+تحتوي على المناطق والمدن مع الإحداثيات الجغرافية والحدود (GeoJSON)
+**ملاحظة:** بيانات الأحياء غير متوفرة في هذه النسخة (استخدم npm أو النسخة الخفيفة)
 
 **CDN Links:**
 ```html
 <!-- UMD (للمتصفح) -->
-<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/index.js"></script>
 
 <!-- ES Module -->
 <script type="module">
-  import * as SaudiGeodata from 'https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/index.mjs';
+  import * as SaudiGeodata from 'https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/index.mjs';
 </script>
 ```
 
 **الوظائف المتاحة / Available Functions:**
 - ✅ `getAllRegions()` - جميع المناطق
 - ✅ `getAllCities()` - جميع المدن
-- ✅ `getAllDistricts()` - جميع الأحياء
+- ⚠️ `getAllDistricts()` - يعيد مصفوفة فارغة (استخدم النسخة الخفيفة أو npm)
 - ✅ `getCitiesByName(name)` - البحث عن المدن
 - ✅ `getRegionById(id)` - منطقة حسب المعرف
 - ✅ `getCityById(id)` - مدينة حسب المعرف
-- ✅ `getDistrictById(id)` - حي حسب المعرف
 - ✅ `getCitiesByRegion(regionId)` - مدن المنطقة
-- ✅ `getDistrictsByCity(cityId)` - أحياء المدينة
-- ✅ `getDistrictsByRegion(regionId)` - أحياء المنطقة
 - ✅ `calculateDistance(lon1, lat1, lon2, lat2)` - حساب المسافة
 - ✅ `reverseGeocode(lon, lat)` - تحديد الموقع من الإحداثيات
 - ✅ `findNearestCities(lon, lat, count)` - أقرب المدن
@@ -36,24 +34,24 @@
 
 ---
 
-### النسخة الخفيفة / Lite Version (~900KB)
-تحتوي على البيانات الأساسية فقط (أسماء ومعرفات) بدون إحداثيات أو حدود
+### النسخة الخفيفة / Lite Version (~1MB) ⭐ موصى به
+تحتوي على البيانات الأساسية (أسماء، معرفات، أحياء) بدون إحداثيات أو حدود
 
 **CDN Links:**
 ```html
 <!-- UMD (للمتصفح) -->
-<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/lite.js"></script>
 
 <!-- ES Module -->
 <script type="module">
-  import * as SaudiGeodataLite from 'https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.mjs';
+  import * as SaudiGeodataLite from 'https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/lite.mjs';
 </script>
 ```
 
 **الوظائف المتاحة / Available Functions:**
 - ✅ `getAllRegions()` - جميع المناطق
 - ✅ `getAllCities()` - جميع المدن
-- ✅ `getAllDistricts()` - جميع الأحياء
+- ✅ `getAllDistricts()` - جميع الأحياء (البيانات الأساسية)
 - ✅ `getCitiesByName(name)` - البحث عن المدن
 - ✅ `getRegionById(id)` - منطقة حسب المعرف
 - ✅ `getCityById(id)` - مدينة حسب المعرف
@@ -61,10 +59,10 @@
 - ✅ `getCitiesByRegion(regionId)` - مدن المنطقة
 - ✅ `getDistrictsByCity(cityId)` - أحياء المدينة
 - ✅ `getDistrictsByRegion(regionId)` - أحياء المنطقة
-- ❌ ~~`calculateDistance()`~~ - غير متاح (لا توجد إحداثيات)
+- ✅ `calculateDistance(lon1, lat1, lon2, lat2)` - حساب المسافة (إن وجدت الإحداثيات)
 - ❌ ~~`reverseGeocode()`~~ - غير متاح (لا توجد بيانات GeoJSON)
-- ❌ ~~`findNearestCities()`~~ - غير متاح (لا توجد إحداثيات)
-- ❌ ~~`findCitiesInRadius()`~~ - غير متاح (لا توجد إحداثيات)
+- ❌ ~~`findNearestCities()`~~ - غير متاح (لا توجد إحداثيات في الأحياء)
+- ❌ ~~`findCitiesInRadius()`~~ - غير متاح (لا توجد إحداثيات في الأحياء)
 
 ---
 
@@ -142,7 +140,7 @@
     <h1>مثال النسخة الخفيفة</h1>
     <div id="result"></div>
 
-    <script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@v1.0.1/dist/lite.js"></script>
     <script>
         const geo = window.SaudiGeodataLite;
         
@@ -221,34 +219,48 @@
 - ✅ تحتاج لتحديد الموقع من الإحداثيات (Reverse Geocoding)
 - ✅ تحتاج للبحث عن أقرب المدن
 - ✅ تعمل مع خرائط (Maps) وبيانات جغرافية
-- ✅ حجم الملف ليس مشكلة (~13MB)
+- ✅ حجم الملف ليس مشكلة (~17MB)
+- ❌ لا تحتاج لبيانات الأحياء
 
-### استخدم النسخة الخفيفة / Use Lite Version When:
-- ✅ تحتاج فقط للأسماء والمعرفات
+### استخدم النسخة الخفيفة / Use Lite Version When: ⭐ موصى به
+- ✅ تحتاج للأسماء والمعرفات
+- ✅ تحتاج لبيانات الأحياء (Districts)
 - ✅ تبني قوائم منسدلة (Dropdowns)
 - ✅ تحتاج لسرعة تحميل أعلى
-- ✅ لا تحتاج للوظائف الجغرافية
-- ✅ حجم الملف مهم (~900KB فقط)
+- ✅ لا تحتاج للوظائف الجغرافية المتقدمة
+- ✅ حجم الملف مهم (~1MB فقط)
+
+### استخدم npm Package للحصول على كل شيء:
+```bash
+npm install alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts
+```
+- ✅ جميع البيانات (مناطق، مدن، أحياء)
+- ✅ جميع الوظائف الجغرافية
+- ✅ لا قيود على الحجم
 
 ---
 
 ## 📊 مقارنة الأداء / Performance Comparison
 
-| المقارنة / Feature | النسخة الكاملة / Full | النسخة الخفيفة / Lite |
+| المقارنة / Feature | النسخة الكاملة / Full | النسخة الخفيفة / Lite ⭐ |
 |-------------------|-------------------|-------------------|
-| **حجم الملف / Size** | ~13 MB | ~900 KB |
-| **وقت التحميل / Load Time** | 2-5 ثواني | < 1 ثانية |
+| **حجم الملف / Size** | ~17 MB | ~1 MB |
+| **وقت التحميل / Load Time** | 3-7 ثواني | < 1 ثانية |
 | **البيانات الجغرافية / Geodata** | ✅ متاح | ❌ غير متاح |
-| **البيانات الأساسية / Basic Data** | ✅ متاح | ✅ متاح |
+| **المناطق والمدن / Regions & Cities** | ✅ متاح | ✅ متاح |
+| **الأحياء / Districts** | ❌ غير متاح* | ✅ متاح (5000+) |
 | **حساب المسافات / Distance** | ✅ متاح | ❌ غير متاح |
 | **Reverse Geocoding** | ✅ متاح | ❌ غير متاح |
+
+> **ملاحظة هامة:** بيانات الأحياء (districts.json) كبيرة جداً (58MB) ولا يمكن تحميلها عبر CDN.  
+> للحصول على جميع بيانات الأحياء الكاملة مع التفاصيل، يرجى استخدام npm package.
 
 ---
 
 ## 🔗 روابط إضافية / Additional Links
 
 - **GitHub Repository**: https://github.com/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts
-- **npm Package**: `npm install saudi-arabia-geodata`
+- **npm Installation**: `npm install github:alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts`
 - **Documentation**: [README.md](README.md)
 - **API Reference**: [docs/API.md](docs/API.md)
 
@@ -257,9 +269,10 @@
 ## 📝 ملاحظات / Notes
 
 1. **التخزين المؤقت / Caching**: jsDelivr CDN يخزن الملفات تلقائياً لتحميل أسرع
-2. **الإصدارات / Versioning**: استخدم `@master` للإصدار الأخير أو حدد إصدار معين
+2. **الإصدارات / Versioning**: استخدم `@v1.0.1` للإصدار الثابت أو `@master` للإصدار الأخير
 3. **الأداء / Performance**: النسخة الخفيفة أسرع 10x في التحميل
 4. **المتصفحات / Browsers**: يعمل على جميع المتصفحات الحديثة (Chrome, Firefox, Safari, Edge)
+5. **حد الحجم / Size Limit**: jsDelivr يسمح بملفات حتى 20MB فقط، لذلك تم استبعاد الأحياء من النسخة الكاملة
 
 ---
 
