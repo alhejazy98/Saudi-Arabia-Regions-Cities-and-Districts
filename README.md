@@ -1,87 +1,132 @@
-# Saudi Arabia Regions, Cities and Districts
-# المناطق والمدن والأحياء في المملكة العربية السعودية
+# Saudi Arabia Geodata Library 🇸🇦
+# مكتبة البيانات الجغرافية للمملكة العربية السعودية
 
-[![npm version](https://badge.fury.io/js/saudi-arabia-geodata.svg)](https://www.npmjs.com/package/saudi-arabia-geodata)
 [![License: GPL-2.0](https://img.shields.io/badge/License-GPL--2.0-blue.svg)](https://opensource.org/licenses/GPL-2.0)
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-79%20passing-brightgreen.svg)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3.3-blue.svg)]()
 
-Raw data for Saudi Arabia's 13 regions, over 4580 cities and 3730 districts in both Arabic and English.
+A comprehensive TypeScript/JavaScript library for Saudi Arabia's geographic data with advanced reverse geocoding capabilities.
 
-بيانات خام لمناطق المملكة العربية السعودية الـ 13، أكثر من 4580 مدينة و 3730 حي بالعربية والإنجليزية.
+مكتبة شاملة بلغة TypeScript/JavaScript للبيانات الجغرافية للمملكة العربية السعودية مع قدرات متقدمة للبحث الجغرافي العكسي.
 
-## 📦 NPM Package / حزمة NPM
+---
 
-You can now use this data easily in your JavaScript/TypeScript projects!
+## ✨ Features / المميزات
 
-يمكنك الآن استخدام هذه البيانات بسهولة في مشاريع JavaScript/TypeScript الخاصة بك!
+- 🗺️ **Complete Data** - 13 regions, 1800+ cities, 5000+ districts
+- 🌍 **Reverse Geocoding** - GPS coordinates → location details
+- 📍 **Point-in-Polygon** - Region boundary detection
+- 🎯 **Spatial Indexing** - Fast nearest city search
+- 🔍 **Smart Search** - Arabic & English with flexible options
+- 📦 **Dual Versions** - Full (45MB) + Lite (2MB)
+- ⚡ **Optimized** - Spatial caching & tree-shaking
+- 🎨 **Framework Ready** - Vue, React, React Native, Angular
+- 💪 **TypeScript** - Full type safety
+- 🧪 **Well Tested** - 79 tests, 100% pass rate
+
+## 📦 Installation / التثبيت
 
 ```bash
-npm install saudi-arabia-geodata
+# From GitHub
+npm install alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts
+
+# Local development
+git clone https://github.com/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts.git
+cd Saudi-Arabia-Regions-Cities-and-Districts
+npm install
+npm run build
 ```
 
-### Quick Example / مثال سريع
+## 🚀 Quick Start / البداية السريعة
+
+## 🚀 Quick Start / البداية السريعة
 
 ```javascript
 import { reverseGeocode, searchCities, getAllRegions } from 'saudi-arabia-geodata';
 
-// Find location from GPS coordinates / إيجاد الموقع من إحداثيات GPS
+// Reverse geocoding from GPS coordinates
 const location = reverseGeocode(24.7136, 46.6753);
-console.log(location.region?.name_ar);  // "منطقة الرياض"
-console.log(location.nearestCity?.name_en);  // "Riyadh"
+console.log(location.region?.name_ar);      // "منطقة الرياض"
+console.log(location.nearestCity?.name_en); // "Riyadh"
+console.log(location.distance);             // Distance in km
 
-// Search cities / البحث عن المدن
+// Search cities
 const cities = searchCities('جدة');
 console.log(cities[0].name_en);  // "Jeddah"
 
-// Get all regions / الحصول على جميع المناطق
+// Get all regions
 const regions = getAllRegions();  // 13 regions
 ```
 
-### Key Features / المميزات الرئيسية
+## 📚 Documentation / التوثيق
 
-- 🌍 **Reverse Geocoding** - Convert coordinates to location names / تحويل الإحداثيات إلى أسماء المواقع
-- 🔍 **Smart Search** - Search in Arabic & English / البحث بالعربية والإنجليزية
-- 📍 **Point-in-Polygon** - Check if coordinates are within region boundaries / التحقق من وجود الإحداثيات ضمن حدود المنطقة
-- 📦 **Two Versions** - Full (~45MB) and Lite (~2MB) / نسختان - كاملة وخفيفة
-- ⚡ **Fast & Optimized** - Spatial indexing for performance / محسنة للأداء
-- 🎨 **Framework Ready** - Vue, React, React Native, Angular / جاهز للأطر
+- **[API Reference](./docs/API.md)** - Complete API documentation
+- **[Build Guide](./docs/BUILD.md)** - Development setup
+- **[Quick Start](./QUICKSTART.md)** - Beginner's guide
+- **[Examples](./examples/)** - Vue.js, React, React Native
 
-See full documentation at [/docs/API.md](/docs/API.md)
+## 🎯 Use Cases / حالات الاستخدام
 
-راجع التوثيق الكامل في [/docs/API.md](/docs/API.md)
+- 📍 Location-based services (GPS → address)
+- 🗺️ Interactive maps
+- 📱 Mobile apps (Lite version: 2MB)
+- 🚗 Navigation & routing
+- 📊 Data visualization
+- 🏢 Address validation
+- 🛒 E-commerce shipping zones
 
----
+## 🙏 Acknowledgments / الشكر والتقدير
+
+This project builds upon the excellent work of **[@homaily](https://github.com/homaily)'s** original repository: [Saudi-Arabia-Regions-Cities-and-Districts](https://github.com/homaily/Saudi-Arabia-Regions-Cities-and-Districts)
+
+**Original Data Source:** [Saudi Address Database](https://maps.address.gov.sa/)
+
+### What's New in This Version / ما الجديد
+
+- ✨ Complete TypeScript/JavaScript library
+- 🌍 Advanced reverse geocoding
+- 📍 Point-in-polygon detection
+- ⚡ Spatial indexing & caching
+- 🧪 79 comprehensive tests
+- 📚 Bilingual documentation
+- 🎨 Framework examples
+- 📦 Dual bundle (Full + Lite)
+
+نشكر المستودع الأصلي على توفير البيانات الجغرافية القيمة.
 
 ## 📊 Data Information / معلومات البيانات
 
-* The data is public data collected from https://maps.address.gov.sa/
-* All coordinates in (Lat, Lon) aka (Y, X) format and 8 decimal points, except for MySQL files
-* Mysql files coordinates are reversed (Lon, Lat) aka (X, Y) due to the way MySQL expect it
-* Data points include:
-  - Regions, Cities and Districts.
-  - Names (Arabic & English).
-  - Regions capital city, population & center point.
-  - Regions boundaries.
-  - Districts boundaries.
-* Lite version includes all data points except GIS data (center point & boundaries).
+## 📊 Data Information / معلومات البيانات
 
+- **13 Regions** - With population, capitals, and boundaries
+- **1,800+ Cities** - With coordinates and region mapping
+- **5,000+ Districts** - With city associations
+- **Bilingual** - Arabic and English names
+- **Formats** - JSON, GeoJSON, MySQL, TypeScript
 
-## Data Use Cases
-This is a list of some of the open source projects based on this data:
-* [KSA Covid-19 cases map](https://github.com/0x0Faisal/Covid19-Map) by [@0x0Faisal](https://github.com/0x0Faisal).
-* [Saudi_geo_clickhouse](https://github.com/swarnkiran88/swarnkiran88) by [@swarnkiran88](https://github.com/swarnkiran88).
-* [Saudi_GIS_Data](https://github.com/usefksa/Saudi_GIS_Data) by [@usef_ksa](https://github.com/usef_ksa).
-* [Manateq - a handy library for searching and listing regions, cities and districts in Saudi Arabia](https://github.com/nuhamozaini/Manateq) by [@nuhamozaini](https://github.com/nuhamozaini).
+## 🔗 Related Projects / مشاريع ذات صلة
 
+- [KSA Covid-19 Map](https://github.com/0x0Faisal/Covid19-Map) by [@0x0Faisal](https://github.com/0x0Faisal)
+- [Manateq](https://github.com/nuhamozaini/Manateq) by [@nuhamozaini](https://github.com/nuhamozaini)
+- [Saudi_GIS_Data](https://github.com/usefksa/Saudi_GIS_Data) by [@usef_ksa](https://github.com/usef_ksa)
 
+## 🤝 Contributing / المساهمة
 
-## Contributing
-All contributions are welcome! 😊
-Please only send PRs that benefit most users or have a common use case. For special use cases, please publish them to a separate repo.
+Contributions welcome! Please submit a Pull Request.
 
-## Issues
-If you find an issue with the data please open an issue. If you're looking for help in using the data in your own projects, please use the appropriate forums, such as StackOverflow.
+```bash
+git clone https://github.com/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts.git
+cd Saudi-Arabia-Regions-Cities-and-Districts
+npm install
+npm test
+npm run build
+```
 
+## 📄 License / الرخصة
 
-## License
-[GPL-2.0](https://github.com/homaily/Saudi-Arabia-Regions-Cities-and-Districts/blob/master/LICENSE)
+[GPL-2.0](./LICENSE) - Inherited from the original repository
+
+---
+
+**Made with ❤️ for Saudi Arabia / صنع بـ ❤️ للمملكة العربية السعودية**
+
