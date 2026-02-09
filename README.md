@@ -39,8 +39,6 @@ npm run build
 
 ## 🚀 Quick Start / البداية السريعة
 
-## 🚀 Quick Start / البداية السريعة
-
 ```javascript
 import { reverseGeocode, searchCities, getAllRegions } from 'saudi-arabia-geodata';
 
@@ -93,8 +91,6 @@ This project builds upon the excellent work of **[@homaily](https://github.com/h
 - 📦 Dual bundle (Full + Lite)
 
 نشكر المستودع الأصلي على توفير البيانات الجغرافية القيمة.
-
-## 📊 Data Information / معلومات البيانات
 
 ## 📊 Data Information / معلومات البيانات
 
