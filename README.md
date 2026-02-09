@@ -37,6 +37,33 @@ npm install
 npm run build
 ```
 
+### 🌐 CDN Usage / الاستخدام من CDN
+
+Use directly in browser without installation:
+
+```html
+<!-- Full Version (~13MB) with all geographic features -->
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/index.js"></script>
+<script>
+  const geo = window.SaudiGeodata;
+  const location = geo.reverseGeocode(46.6753, 24.7136);
+  console.log(location.region.name_ar); // "منطقة الرياض"
+</script>
+
+<!-- Lite Version (~900KB) for basic data only -->
+<script src="https://cdn.jsdelivr.net/gh/alhejazy98/Saudi-Arabia-Regions-Cities-and-Districts@master/dist/lite.js"></script>
+<script>
+  const geo = window.SaudiGeodataLite;
+  const cities = geo.getCitiesByName('جدة');
+</script>
+```
+
+**📖 [Complete CDN Documentation →](./CDN_USAGE.md)**
+
+Version comparison:
+- **Full** (~13MB): All features including reverse geocoding, distance calculation
+- **Lite** (~900KB): Basic data only (names, IDs) - 15x faster load
+
 ## 🚀 Quick Start / البداية السريعة
 
 ```javascript
@@ -59,6 +86,7 @@ const regions = getAllRegions();  // 13 regions
 ## 📚 Documentation / التوثيق
 
 - **[API Reference](./docs/API.md)** - Complete API documentation
+- **[CDN Usage Guide](./CDN_USAGE.md)** - Browser integration examples
 - **[Build Guide](./docs/BUILD.md)** - Development setup
 - **[Quick Start](./QUICKSTART.md)** - Beginner's guide
 - **[Examples](./examples/)** - Vue.js, React, React Native
