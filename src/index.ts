@@ -1,6 +1,6 @@
 import regionsData from '../json/regions.json';
 import citiesData from '../json/cities.json';
-import districtsData from '../json/districts.json';
+// Districts removed to reduce bundle size - use lite version or load separately
 import type {
   Region,
   City,
@@ -25,7 +25,7 @@ try {
 
 const regions = regionsData as Region[];
 const cities = citiesData as City[];
-const districts = districtsData as District[];
+const districts: District[] = []; // Empty array - districts too large for CDN
 
 /**
  * Get all regions
@@ -44,10 +44,12 @@ export function getAllCities(): City[] {
 }
 
 /**
- * Get all districts
- * @returns Array of all districts
+ * Get all districts (not available in CDN version due to size)
+ * Use lite version or npm package for districts
+ * @returns Empty array in CDN version
  */
 export function getAllDistricts(): District[] {
+  console.warn('Districts not available in CDN full version (too large). Use npm package or lite version.');
   return districts;
 }
 
